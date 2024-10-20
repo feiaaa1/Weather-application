@@ -1,26 +1,42 @@
+<!--
+ * @Author: wx 2504597640@qq.com
+ * @Date: 2024-10-14 20:32:55
+ * @LastEditors: wx 2504597640@qq.com
+ * @LastEditTime: 2024-10-20 19:37:07
+ * @FilePath: \net_ninja_vue_3_weather_app-main\src\views\HomeView.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
   <main class="container text-white">
     <div class="pt-4 mb-8 relative">
+      <!-- 输入框 -->
       <input
         type="text"
         v-model="searchQuery"
         @input="getSearchResults"
+        
         placeholder="Search for a city or state"
         class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]"
       />
+      <transition name="search">
+      <!-- 输入提示 -->
       <ul
-        class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66px]"
+      id="search-results"
+        class="relatives text-white w-full shadow-md py-2 px-1 top-[66px]"
         v-if="mapboxSearchResults"
       >
+      
         <p class="py-2" v-if="searchError">
           Sorry, something went wrong, please try again.
         </p>
+
         <p
           class="py-2"
           v-if="!searchError && mapboxSearchResults.length === 0"
         >
           No results match your query, try a different term.
         </p>
+
         <template v-else>
           <li
             v-for="searchResult in mapboxSearchResults"
@@ -31,12 +47,16 @@
             {{ searchResult.place_name }}
           </li>
         </template>
+
       </ul>
+    </transition>
     </div>
     <div class="flex flex-col gap-4">
       <Suspense>
-        <CityList />
-        <template #fallback>
+        <transition name="city-list">
+          <CityList v-if="!mapboxSearchResults"/>
+        </transition>
+          <template #fallback>
           <CityCardSkeleton />
         </template>
       </Suspense>
@@ -45,11 +65,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import CityCardSkeleton from "../components/CityCardSkeleton.vue";
 import CityList from "../components/CityList.vue";
+
+
 
 const router = useRouter();
 const previewCity = (searchResult) => {
@@ -92,4 +114,28 @@ const getSearchResults = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+#search-results{
+  background-color: rgba(255, 237, 237, 0.5);
+  transform-origin: top;
+  border-radius: 5px;
+}
+.search-enter-from,
+.search-leave-to{
+  opacity: 0;
+  transform: scaleY(0.2);
+}
+.search-enter-active,
+.search-leave-active{
+  transition: all .3s ease-out;
+}
+.city-list-enter-active,
+.city-list-leave-active {
+  transition: all .3s ease-out;
+}
+.city-list-enter-from,
+.city-list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+</style>

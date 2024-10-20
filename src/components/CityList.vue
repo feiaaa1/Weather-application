@@ -1,13 +1,23 @@
+<!--
+ * @Author: wx 2504597640@qq.com
+ * @Date: 2024-10-14 20:32:55
+ * @LastEditors: wx 2504597640@qq.com
+ * @LastEditTime: 2024-10-20 19:04:10
+ * @FilePath: \net_ninja_vue_3_weather_app-main\src\components\CityList.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
-  <div v-for="city in savedCities" :key="city.id">
-    <CityCard :city="city" @click="goToCityView(city)" />
-  </div>
+  <div>
 
-  <p v-if="savedCities.length === 0">
-    No locations added. To start tracking a location, search in
-    the field above.
-  </p>
-</template>
+    <div v-for="city in savedCities" :key="city.id" >
+      <CityCard :city="city" @click="goToCityView(city)" />
+    </div>
+    <p v-if="savedCities.length === 0">
+      No locations added. To start tracking a location, search in
+      the field above.
+    </p>
+  </div>
+  </template>
 
 <script setup>
 import axios from "axios";
