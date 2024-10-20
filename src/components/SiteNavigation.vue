@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 bg-transparent shadow-lg" :class="{blur: !FuzzyBackdrop}">
+  <header class="sticky top-0 bg-transparent shadow-lg" :class="{bgblur: !FuzzyBackdrop}">
     <nav
       class="container flex flex-col sm:flex-row items-center gap-4 text-white py-6"
     >
@@ -125,7 +125,7 @@ const toggleModal = () => {
 </script>
 
 <style scoped>
-.blur {
+.bgblur {
   backdrop-filter: blur(5px);
 }
 </style>

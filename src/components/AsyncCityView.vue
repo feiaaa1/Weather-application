@@ -3,7 +3,7 @@
     <!-- Banner -->
     <div
       v-if="route.query.preview"
-      :class="{opacity: !showPreviewBanner}"
+      :class="{bgopacity: !showPreviewBanner}"
       class="text-white bg-weather-primary p-4 w-full text-center transition-all duration-100"
     >
       <p>
@@ -199,7 +199,7 @@ const removeCity = () => {
 };
 </script>
 <style scoped>
-.opacity {
+.bgopacity {
   opacity: 0;
 }
 </style>
