@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 bg-transparent shadow-lg">
+  <header class="sticky top-0 bg-transparent shadow-lg" :class="{blur: !FuzzyBackdrop}">
     <nav
       class="container flex flex-col sm:flex-row items-center gap-4 text-white py-6"
     >
@@ -64,8 +64,27 @@
 <script setup>
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { uid } from "uid";
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import BaseModal from "./BaseModal.vue";
+
+
+const FuzzyBackdrop = ref(true);
+
+// 滚动事件处理函数
+const handleScroll = () => {
+  // 检查滚动条位置是否在顶部
+  FuzzyBackdrop.value = window.scrollY === 0;
+};
+
+// 添加滚动事件监听器
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+// 移除滚动事件监听器
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 
 const savedCities = ref([]);
 const route = useRoute();
@@ -104,3 +123,9 @@ const toggleModal = () => {
   modalActive.value = !modalActive.value;
 };
 </script>
+
+<style scoped>
+.blur {
+  backdrop-filter: blur(5px);
+}
+</style>

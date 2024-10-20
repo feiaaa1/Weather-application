@@ -3,7 +3,8 @@
     <!-- Banner -->
     <div
       v-if="route.query.preview"
-      class="text-white bg-weather-primary p-4 w-full text-center"
+      :class="{opacity: !showPreviewBanner}"
+      class="text-white bg-weather-primary p-4 w-full text-center transition-all duration-100"
     >
       <p>
         You are currently previewing this city, click the "+"
@@ -137,7 +138,24 @@
 <script setup>
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
+import { ref, onMounted, onUnmounted } from 'vue';
+const showPreviewBanner = ref(true);
 
+// 滚动事件处理函数
+const handleScroll = () => {
+  // 检查滚动条位置是否在顶部
+  showPreviewBanner.value = window.scrollY === 0;
+};
+
+// 添加滚动事件监听器
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+// 移除滚动事件监听器
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 const route = useRoute();
 const getWeatherData = async () => {
   try {
@@ -180,5 +198,8 @@ const removeCity = () => {
   });
 };
 </script>
-<style>
+<style scoped>
+.opacity {
+  opacity: 0;
+}
 </style>
