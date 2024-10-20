@@ -3,7 +3,7 @@
     <Transition name="modal-outer">
       <div
         v-show="modalActive"
-        class="absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8"
+        class="absolute w-full bg-black bg-opacity-30 top-0 left-0 flex justify-center px-8"
       >
         <Transition name="modal-inner">
           <div
@@ -12,7 +12,7 @@
           >
             <slot />
             <button
-              class="text-white mt-8 bg-weather-primary py-2 px-6"
+              class="bg-weather-secondary text-white mt-8 py-2 px-6"
               @click="$emit('close-modal')"
             >
               Close

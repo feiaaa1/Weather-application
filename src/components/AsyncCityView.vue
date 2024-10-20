@@ -3,7 +3,7 @@
     <!-- Banner -->
     <div
       v-if="route.query.preview"
-      class="text-white p-4 bg-weather-secondary w-full text-center"
+      class="text-white bg-weather-primary p-4 w-full text-center"
     >
       <p>
         You are currently previewing this city, click the "+"
@@ -180,3 +180,5 @@ const removeCity = () => {
   });
 };
 </script>
+<style>
+</style>

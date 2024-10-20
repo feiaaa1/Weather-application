@@ -2,7 +2,7 @@
  * @Author: wx 2504597640@qq.com
  * @Date: 2024-10-14 20:32:55
  * @LastEditors: wx 2504597640@qq.com
- * @LastEditTime: 2024-10-20 19:37:07
+ * @LastEditTime: 2024-10-20 20:12:47
  * @FilePath: \net_ninja_vue_3_weather_app-main\src\views\HomeView.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -22,7 +22,7 @@
       <!-- 输入提示 -->
       <ul
       id="search-results"
-        class="relatives text-white w-full shadow-md py-2 px-1 top-[66px]"
+        class="absolute text-white w-full shadow-md top-[66px]"
         v-if="mapboxSearchResults"
       >
       
@@ -39,9 +39,10 @@
 
         <template v-else>
           <li
+          id="search-result-item"
             v-for="searchResult in mapboxSearchResults"
             :key="searchResult.id"
-            class="py-2 cursor-pointer"
+            class="py-2 px-1 cursor-pointer"
             @click="previewCity(searchResult)"
           >
             {{ searchResult.place_name }}
@@ -54,7 +55,7 @@
     <div class="flex flex-col gap-4">
       <Suspense>
         <transition name="city-list">
-          <CityList v-if="!mapboxSearchResults"/>
+          <CityList v-if="!searchQuery"/>
         </transition>
           <template #fallback>
           <CityCardSkeleton />
@@ -116,7 +117,6 @@ const getSearchResults = () => {
 
 <style scoped>
 #search-results{
-  background-color: rgba(255, 237, 237, 0.5);
   transform-origin: top;
   border-radius: 5px;
 }
@@ -137,5 +137,8 @@ const getSearchResults = () => {
 .city-list-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+#search-result-item:hover{
+  background-color: #ffffff55;
 }
 </style>
