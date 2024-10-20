@@ -142,7 +142,7 @@ const route = useRoute();
 const getWeatherData = async () => {
   try {
     const weatherData = await axios.get(
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=9b8270bfd9ff96e3672feffda35e673f&lang=zh_cn`
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=9b8270bfd9ff96e3672feffda35e673f&lang=zh_cn&units=metric`
     );
 
     // cal current date & time

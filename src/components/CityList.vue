@@ -2,7 +2,7 @@
  * @Author: wx 2504597640@qq.com
  * @Date: 2024-10-14 20:32:55
  * @LastEditors: wx 2504597640@qq.com
- * @LastEditTime: 2024-10-20 19:04:10
+ * @LastEditTime: 2024-10-21 00:58:43
  * @FilePath: \net_ninja_vue_3_weather_app-main\src\components\CityList.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -36,7 +36,7 @@ const getCities = async () => {
     savedCities.value.forEach((city) => {
       requests.push(
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${city.coords.lat}&lon=${city.coords.lng}&appid=7efa332cf48aeb9d2d391a51027f1a71&units=imperial`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${city.coords.lat}&lon=${city.coords.lng}&appid=7efa332cf48aeb9d2d391a51027f1a71&units=metric`
         )
       );
     });
